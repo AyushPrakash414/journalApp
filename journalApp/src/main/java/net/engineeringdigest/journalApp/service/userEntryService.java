@@ -15,30 +15,23 @@ public class userEntryService {
     @Autowired
     private userEntryRepository repository;
 
-    public void saveUserEntry(User entry)
-    {
+    public void saveUserEntry(User entry) {
         repository.save(entry);
     }
 
-    public List<User> GetAll()
-    {
+    public List<User> getAll() {
         return repository.findAll();
     }
 
-    public Optional<User> getEntryByItsID(ObjectId id)
-    {
+    public Optional<User> getEntryByItsID(ObjectId id) {
         return repository.findById(id);
     }
 
-    public void updateTheEntryById(ObjectId id, User newEntry)
-    {
-        repository.save(newEntry);
+    public Optional<User> getUserByUserName(String userName) {
+        return repository.findByUserName(userName);
     }
 
-    public String DeleteTheEntryById(ObjectId id)
-    {
+    public void deleteEntryById(ObjectId id) {
         repository.deleteById(id);
-        return "Deleted!!";
     }
-
 }
