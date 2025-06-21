@@ -12,13 +12,20 @@ import java.util.List;
 
 @Document(collection = "users")
 public class User {
-
     @Id
     private ObjectId id;
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
     @Indexed(unique = true)
     private String userName;
     private String password;
-
+    private List<String>roles;
     @DBRef
     private List<journalEntry> journalEntries = new ArrayList<>();
 
@@ -29,7 +36,6 @@ public class User {
     public void setId(ObjectId id) {
         this.id = id;
     }
-
     public String getUserName() {
         return userName;
     }

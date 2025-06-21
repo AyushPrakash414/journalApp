@@ -48,7 +48,7 @@ public class userEntryController {
                 .map(user -> {
                     user.setUserName(newEntry.getUserName());
                     user.setPassword(newEntry.getPassword());
-                    entry.saveUserEntry(user);
+                    entry.updateUser(username,user);
                     return ResponseEntity.ok("Updated");
                 })
                 .orElseGet(() -> ResponseEntity.notFound().build());
