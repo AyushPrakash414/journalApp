@@ -1,10 +1,14 @@
 package net.engineeringdigest.journalApp.Controller;
 
 import net.engineeringdigest.journalApp.Entity.User;
+import net.engineeringdigest.journalApp.Repository.userEntryRepository;
 import net.engineeringdigest.journalApp.service.userEntryService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,15 +17,11 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/user")
 public class userEntryController {
+    @Autowired
+    private userEntryRepository repo;
 
     @Autowired
     private userEntryService entry;
-
-    @PostMapping
-    public ResponseEntity<String> createEntry(@RequestBody User currentEntry) {
-        entry.saveUserEntry(currentEntry);
-        return ResponseEntity.ok("User entry created successfully.");
-    }
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
@@ -42,21 +42,26 @@ public class userEntryController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/updateUser/{username}")
-    public ResponseEntity<String> updateUserByUserName(@PathVariable String username, @RequestBody User newEntry) {
-        return entry.getUserByUserName(username)
-                .map(user -> {
-                    user.setUserName(newEntry.getUserName());
-                    user.setPassword(newEntry.getPassword());
-                    entry.updateUser(username,user);
-                    return ResponseEntity.ok("Updated");
-                })
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    @PutMapping
+    public ResponseEntity<String> updateUserByUserName( @RequestBody User UpdatedEntry) {
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        String name=authentication.getName();
+        Optional<User>UserInDB=entry.getUserByUserName(name);
+        if (UserInDB.isPresent())
+        {
+
+            UserInDB.get().setUserName(UpdatedEntry.getUserName());
+            UserInDB.get().setPassword(UpdatedEntry.getPassword());
+            entry.saveUserEntry(UserInDB.get());
+            return new ResponseEntity<>("Updated",HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Error",HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteUserById(@PathVariable ObjectId id) {
-        entry.deleteEntryById(id);
-        return ResponseEntity.ok("Deleted");
+    @DeleteMapping
+    public ResponseEntity<String> deleteUserById() {
+        Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+        repo.deleteByUserName(authentication.getName());
+        return new ResponseEntity<>("Deleted",HttpStatus.OK);
     }
 }
