@@ -23,5 +23,5 @@ public class JournalApplication {
     {
         return new MongoTransactionManager(dbFactory);
     }
-//Ayush prakash Tiwari.
+//Ayush prakash Tiwari..
 }
