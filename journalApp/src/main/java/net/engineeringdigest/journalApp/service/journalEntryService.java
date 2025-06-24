@@ -25,7 +25,7 @@ public class journalEntryService {
         if (user.isPresent()) {
             journalEntry saved = repository.save(entry);
             user.get().getJournalEntries().add(saved);
-            userService.saveUserEntry(user.get());
+            userService.SaveUser(user.get());
         } else {
             throw new RuntimeException("User not found: " + UserName);
         }
@@ -42,7 +42,7 @@ public class journalEntryService {
         return repository.findById(id);
     }
 
-    public void updateTheEntryById(String id,journalEntry newEntry)
+    public void updateTheEntryById(journalEntry newEntry)
     {
         repository.save(newEntry);
     }

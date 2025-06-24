@@ -52,7 +52,7 @@ public class userEntryController {
 
             UserInDB.get().setUserName(UpdatedEntry.getUserName());
             UserInDB.get().setPassword(UpdatedEntry.getPassword());
-            entry.saveUserEntry(UserInDB.get());
+            entry.saveNewUser(UserInDB.get());
             return new ResponseEntity<>("Updated",HttpStatus.OK);
         }
         return new ResponseEntity<>("Error",HttpStatus.NOT_FOUND);

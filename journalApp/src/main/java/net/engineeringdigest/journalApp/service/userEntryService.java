@@ -8,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,11 +17,17 @@ public class userEntryService {
     @Autowired
     private userEntryRepository repository;
     private static final PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
-    public void saveUserEntry(User entry) {
+    public void saveNewUser(User entry) {
         entry.setPassword(passwordEncoder.encode(entry.getPassword()));
         entry.setRoles(List.of("user"));
         repository.save(entry);
     }
+
+    public void SaveUser(User user)
+    {
+        repository.save(user);
+    }
+
     public boolean updateUser(String username, User newEntry) {
         Optional<User> userOpt = repository.findByUserName(username);
         if (userOpt.isPresent()) {

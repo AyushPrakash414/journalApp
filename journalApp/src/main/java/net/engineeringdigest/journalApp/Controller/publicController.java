@@ -16,7 +16,7 @@ public class publicController {
     private userEntryService entry;
     @PostMapping
     public ResponseEntity<String> createEntry(@RequestBody User currentEntry) {
-        entry.saveUserEntry(currentEntry);
+        entry.saveNewUser(currentEntry);
         return ResponseEntity.ok("User entry created successfully.");
     }
 
