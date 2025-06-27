@@ -1,6 +1,6 @@
-package net.engineeringdigest.journalApp.config;
+package net.AyushPrakash.journalApp.config;
 
-import net.engineeringdigest.journalApp.service.userDetailIMPL;
+import net.AyushPrakash.journalApp.service.userDetailIMPL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +22,7 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter
     {
         http.authorizeRequests()
                 .antMatchers("/journal/**","/user/**").authenticated()
+                .antMatchers("/Admin/**").hasRole("ADMIN")
                 .anyRequest().permitAll()
                 .and()
                 .httpBasic();

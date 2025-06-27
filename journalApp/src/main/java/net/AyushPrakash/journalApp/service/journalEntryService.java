@@ -1,8 +1,8 @@
-package net.engineeringdigest.journalApp.service;
+package net.AyushPrakash.journalApp.service;
 
-import net.engineeringdigest.journalApp.Entity.User;
-import net.engineeringdigest.journalApp.Entity.journalEntry;
-import net.engineeringdigest.journalApp.Repository.journalEntryRepository;
+import net.AyushPrakash.journalApp.Entity.User;
+import net.AyushPrakash.journalApp.Entity.journalEntry;
+import net.AyushPrakash.journalApp.Repository.journalEntryRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ public class journalEntryService {
     @Autowired
     private journalEntryRepository repository;
     @Transactional
-    public void saveJournalEntry(journalEntry entry,String UserName)
+    public void saveJournalEntry(journalEntry entry, String UserName)
     {
         Optional<User> user = userService.getUserByUserName(UserName);
         if (user.isPresent()) {

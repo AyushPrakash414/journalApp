@@ -1,4 +1,4 @@
-package net.engineeringdigest.journalApp.Entity;
+package net.AyushPrakash.journalApp.Entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
