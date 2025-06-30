@@ -35,3 +35,4 @@ build/
 src/main/resources/application.properties
 journalApp/src/main/resources/dev.yml
 journalApp/src/main/resources/prod.yml
+src/main/resources/*.properties
