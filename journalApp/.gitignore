@@ -32,6 +32,6 @@ build/
 
 ### VS Code ###
 .vscode/
-journalApp/src/resources/application.properties
-journalApp/src/resources/dev.yml
-journalApp/src/resources/prod.yml
+journalApp/src/main/resources/application.properties
+journalApp/src/main/resources/dev.yml
+journalApp/src/main/resources/prod.yml
