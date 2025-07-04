@@ -1,8 +1,10 @@
 package net.AyushPrakash.journalApp.Controller;
 
 import net.AyushPrakash.journalApp.Entity.User;
+import net.AyushPrakash.journalApp.Entity.WeatherResponse;
 import net.AyushPrakash.journalApp.service.userEntryService;
 import net.AyushPrakash.journalApp.Repository.userEntryRepository;
+import net.AyushPrakash.journalApp.service.weatherService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,10 +24,14 @@ public class userEntryController {
 
     @Autowired
     private userEntryService entry;
+    @Autowired
+    weatherService service;
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(entry.getAll());
+    public WeatherResponse greeting()
+    {
+        Authentication auth=SecurityContextHolder.getContext().getAuthentication();
+        return (service.GetWeather("Mumbai"));
     }
 
     @GetMapping("/id/{id}")
