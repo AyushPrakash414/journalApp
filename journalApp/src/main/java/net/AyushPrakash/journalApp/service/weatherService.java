@@ -5,9 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-@Component
+@Service
 public class weatherService {
     private final String ApiKey="17fa299c98cbf1762aebe3e5cf9a316d";
     private final  String Api="https://api.weatherstack.com/current?access_key=API_KEY&query=CITY;";
