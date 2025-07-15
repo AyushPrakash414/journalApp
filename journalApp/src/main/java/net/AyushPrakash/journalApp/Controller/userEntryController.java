@@ -2,6 +2,7 @@ package net.AyushPrakash.journalApp.Controller;
 
 import net.AyushPrakash.journalApp.Entity.User;
 import net.AyushPrakash.journalApp.Entity.WeatherResponse;
+import net.AyushPrakash.journalApp.cache.AppCache;
 import net.AyushPrakash.journalApp.service.userEntryService;
 import net.AyushPrakash.journalApp.Repository.userEntryRepository;
 import net.AyushPrakash.journalApp.service.weatherService;
@@ -26,6 +27,7 @@ public class userEntryController {
     private userEntryService entry;
     @Autowired
     weatherService service;
+
 
     @GetMapping
     public WeatherResponse greeting()
