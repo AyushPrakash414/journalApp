@@ -18,8 +18,14 @@ public class UserRepositoryIMPL {
     @GetMapping
     public List<User> getUser()
     {
-        Query query=new Query();
-        query.addCriteria(Criteria.where("userName").is("Ayush"));
+        Criteria criteria = new Criteria();
+        Query query = new Query();
+        query.addCriteria(
+                criteria.andOperator(
+                        Criteria.where("Email").exists(true),
+                        Criteria.where("sentementAnalysis").is(true)
+                )
+        );
         return mongoTemplate.find(query,User.class);
     }
 
