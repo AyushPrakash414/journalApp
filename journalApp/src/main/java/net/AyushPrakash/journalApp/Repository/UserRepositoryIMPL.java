@@ -22,8 +22,8 @@ public class UserRepositoryIMPL {
         Query query = new Query();
         query.addCriteria(
                 criteria.andOperator(
-                        Criteria.where("Email").exists(true),
-                        Criteria.where("sentementAnalysis").is(true)
+                        Criteria.where("userName").exists(true)
+
                 )
         );
         return mongoTemplate.find(query,User.class);

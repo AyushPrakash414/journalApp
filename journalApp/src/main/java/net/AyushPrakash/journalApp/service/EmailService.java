@@ -25,7 +25,7 @@ public class EmailService {
     public ResponseEntity<?> SendEmail( EmailDTO Smail)
     {
         Email from = new Email(Smail.getFrom());
-        String subject = "Sending without SMTP";
+        String subject = Smail.getSubject();
         Email to = new Email(Smail.getTo());
         Content content = new Content("text/plain", Smail.getBody());
         Mail mail = new Mail(from, subject, to, content);
