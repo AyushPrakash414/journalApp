@@ -23,7 +23,7 @@ public class FechUserSendmail {
     private EmailService emailService;
     @Autowired
     private UserRepositoryIMPL userRepositoryIMPL;
-    @PostConstruct
+
     public void  ferchUserSendMail()
     {
         ResponseEntity<?> response = adminController.GetAll();

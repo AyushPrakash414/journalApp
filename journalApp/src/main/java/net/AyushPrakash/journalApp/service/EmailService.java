@@ -9,6 +9,7 @@ import com.sendgrid.helpers.mail.objects.Email;
 import lombok.Getter;
 import lombok.Setter;
 import net.AyushPrakash.journalApp.Entity.EmailDTO;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +22,8 @@ import java.io.IOException;
 public class EmailService {
     @Value("${EMAIL_API_KEY}")
     private String api_key;
-    @PostMapping
-    public ResponseEntity<?> SendEmail( EmailDTO Smail)
+
+    public ResponseEntity<?> SendEmail(@NotNull EmailDTO Smail)
     {
         Email from = new Email(Smail.getFrom());
         String subject = Smail.getSubject();
