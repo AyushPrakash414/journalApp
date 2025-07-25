@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class publicController {
     @Autowired
     private userEntryService entry;
-    @PostMapping
+    @PostMapping ("/sighup")
     public ResponseEntity<String> createEntry(@RequestBody User currentEntry) {
         entry.saveNewUser(currentEntry);
         return ResponseEntity.ok("User entry created successfully.");
