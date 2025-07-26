@@ -40,12 +40,11 @@ public class publicController {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     user.getUserName(),user.getPassword()));
             UserDetails userDetail=userDetailImpl.loadUserByUsername(user.getUserName());
-            String token=jwt.generateToken(userDetail.getUsername());
-            return token;
+            return jwt.generateToken(userDetail.getUsername());
         }
         catch(Exception e)
         {
-
+            return e.getMessage();
         }
     }
 
